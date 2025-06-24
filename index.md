@@ -2,11 +2,23 @@
 layout: default
 ---
 
-# Hello, I’m VJ 👋
+# Hello, I'm Vijay 👋
 
-Welcome to my personal space on the web.  
-I'm an embedded software engineer working on robotics, AI, and autonomous systems.
+Welcome to my personal tech space!
 
-- 🛠️ I build cool projects  
-- 📘 I share my learnings  
-- 📦 I plan to host tools like age calculators and note apps here  
+I'm an embedded systems engineer passionate about:
+
+- 🤖 Robotics & Autonomous Vehicles  
+- 🧠 Learning AI & SLAM  
+- 🧪 Building projects for fun and education  
+- 🛠️ Sharing tools like Age Calculator and Note Taking apps  
+
+---
+
+## 🔧 What You’ll Find Here
+
+- My **projects**
+- My **learnings**
+- Links to my **tools/apps**
+
+More features coming soon. Thanks for visiting!
