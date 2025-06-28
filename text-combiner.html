@@ -122,8 +122,32 @@
             box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
         }
 
-        .build-btn:active {
-            transform: translateY(-1px);
+        .copy-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
         }
 
         .result-section {
@@ -219,7 +243,19 @@
             </div>
             
             <div class="result-section">
-                <label for="resultText">Combined Result</label>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                    <label for="resultText" style="margin-bottom: 0;">Combined Result</label>
+                    <button class="copy-btn" onclick="copyToClaudeChat()" title="Copy to clipboard and open Claude chat">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;">
+                            <path d="M7 17L17 7"></path>
+                            <path d="M7 7h10v10"></path>
+                        </svg>
+                    </button>
+                </div>
                 <textarea id="resultText" readonly placeholder="Combined text will appear here..."></textarea>
                 <div class="stats">
                     <div class="stat-item">Characters: <span id="charCount">0</span></div>
@@ -266,10 +302,63 @@
             document.getElementById('lineCount').textContent = lineCount;
         }
         
-        // Add some interactivity - update stats when typing in result box
-        document.getElementById('resultText').addEventListener('input', function() {
-            updateStats(this.value);
-        });
+        function copyToClaudeChat() {
+            const resultText = document.getElementById('resultText').value;
+            
+            if (resultText.trim() === '') {
+                alert('No text to copy! Please build your text first.');
+                return;
+            }
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(resultText).then(function() {
+                // Show success feedback
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalHTML = copyBtn.innerHTML;
+                
+                copyBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                    Copied!
+                `;
+                copyBtn.classList.add('copied');
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+                
+                // Open new Claude chat window
+                window.open('https://claude.ai', '_blank', 'noopener,noreferrer');
+                
+            }).catch(function(err) {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(resultText);
+                window.open('https://claude.ai', '_blank', 'noopener,noreferrer');
+            });
+        }
+        
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                alert('Text copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy text. Please copy manually.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
     </script>
 </body>
 </html>
