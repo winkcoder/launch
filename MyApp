@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Combiner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .text-group {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .text-group:hover {
+            border-color: #4facfe;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.1);
+        }
+
+        .text-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .build-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .build-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .build-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .build-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .result-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+        }
+
+        .result-section label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        #resultText {
+            width: 100%;
+            height: 200px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            background: white;
+            resize: vertical;
+        }
+
+        .stats {
+            margin-top: 15px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: #4facfe;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .input-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            textarea {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Text Combiner</h1>
+            <p>Combine multiple text inputs into one unified result</p>
+        </div>
+        
+        <div class="content">
+            <div class="input-section">
+                <div class="text-group">
+                    <label for="text1">Text Box 1</label>
+                    <textarea id="text1" placeholder="Enter your first text here..."></textarea>
+                </div>
+                
+                <div class="text-group">
+                    <label for="text2">Text Box 2</label>
+                    <textarea id="text2" placeholder="Enter your second text here..."></textarea>
+                </div>
+                
+                <div class="text-group">
+                    <label for="text3">Text Box 3</label>
+                    <textarea id="text3" placeholder="Enter your third text here..."></textarea>
+                </div>
+            </div>
+            
+            <div class="build-section">
+                <button class="build-btn" onclick="combineText()">Build</button>
+            </div>
+            
+            <div class="result-section">
+                <label for="resultText">Combined Result</label>
+                <textarea id="resultText" readonly placeholder="Combined text will appear here..."></textarea>
+                <div class="stats">
+                    <div class="stat-item">Characters: <span id="charCount">0</span></div>
+                    <div class="stat-item">Words: <span id="wordCount">0</span></div>
+                    <div class="stat-item">Lines: <span id="lineCount">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function combineText() {
+            // Get values from all three text boxes
+            const text1 = document.getElementById('text1').value;
+            const text2 = document.getElementById('text2').value;
+            const text3 = document.getElementById('text3').value;
+            
+            // Combine the texts with line breaks between them
+            const combinedText = [text1, text2, text3]
+                .filter(text => text.trim() !== '') // Remove empty texts
+                .join('\n\n'); // Join with double line breaks
+            
+            // Display in the result text box
+            document.getElementById('resultText').value = combinedText;
+            
+            // Update statistics
+            updateStats(combinedText);
+            
+            // Add a subtle animation effect
+            const resultSection = document.querySelector('.result-section');
+            resultSection.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                resultSection.style.transform = 'scale(1)';
+            }, 150);
+        }
+        
+        function updateStats(text) {
+            const charCount = text.length;
+            const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            const lineCount = text === '' ? 0 : text.split('\n').length;
+            
+            document.getElementById('charCount').textContent = charCount;
+            document.getElementById('wordCount').textContent = wordCount;
+            document.getElementById('lineCount').textContent = lineCount;
+        }
+        
+        // Add some interactivity - update stats when typing in result box
+        document.getElementById('resultText').addEventListener('input', function() {
+            updateStats(this.value);
+        });
+    </script>
+</body>
+</html>
