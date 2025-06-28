@@ -22,3 +22,7 @@ I'm an embedded systems engineer passionate about:
 - Links to my **tools/apps**
 
 More features coming soon. Thanks for visiting!
+
+## My Projects
+
+[🔗 Text Combiner App](./text-combiner.html) - Combine multiple text inputs into one unified result
