@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Your Name</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            color: #2c3e50;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .markdown-content h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .markdown-content h3 {
+            color: #34495e;
+            font-size: 1.5rem;
+            margin: 25px 0 10px 0;
+        }
+
+        .markdown-content p {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .markdown-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .markdown-content li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .markdown-content strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>Your Name</h1>
+                <p>Professional Title / Role</p>
+            </div>
+            <div class="nav">
+                <a href="/" class="nav-btn">Home</a>
+                <a href="/PromptBuilder" class="nav-btn">Prompt Builder</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="content">
+                <div class="markdown-content" id="markdown-content">
+                    <!-- Markdown content will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Your markdown content - Edit this section to update your portfolio
+        const markdownContent = `
+## About Me
+
+Welcome to my professional portfolio! I am a passionate **software developer** with a keen interest in creating innovative solutions and continuously learning new technologies.
+
+### Professional Experience
+
+**Current Role** - Software Developer (2023 - Present)
+- Developing web applications using modern frameworks
+- Collaborating with cross-functional teams to deliver high-quality software
+- Implementing best practices in code review and testing
+
+**Previous Role** - Junior Developer (2021 - 2023)
+- Built responsive web interfaces using HTML, CSS, and JavaScript
+- Worked with databases and API integrations
+- Participated in agile development processes
+
+### Skills & Interests
+
+**Technical Skills:**
+- Programming Languages: JavaScript, Python, Java
+- Web Technologies: HTML5, CSS3, React, Node.js
+- Databases: MySQL, MongoDB
+- Tools: Git, Docker, VS Code
+
+**Interests:**
+- Machine Learning and AI
+- Open Source Contributions
+- Tech Blogging
+- Continuous Learning through online courses
+
+### Education
+
+**Bachelor of Science in Computer Science**
+University Name, Year of Graduation
+
+**Certifications:**
+- AWS Cloud Practitioner
+- Google Analytics Certified
+- Various online course completions
+
+### Contact Information
+
+**Email:** your.email@example.com
+**LinkedIn:** linkedin.com/in/yourprofile
+**GitHub:** github.com/yourusername
+**Location:** Your City, Country
+
+### Recent Projects
+
+**Project 1: E-commerce Website**
+Built a full-stack e-commerce platform with user authentication, shopping cart, and payment integration.
+
+**Project 2: Task Management App**
+Developed a React-based task management application with real-time updates and collaborative features.
+
+**Project 3: Data Visualization Dashboard**
+Created interactive dashboards using D3.js to visualize complex datasets for business insights.
+
+---
+
+*Feel free to reach out for collaboration opportunities or just to connect!*
+        `;
+
+        // Simple markdown parser
+        function parseMarkdown(markdown) {
+            return markdown
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+                .replace(/^\* (.*$)/gim, '<li>$1</li>')
+                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/^(?!<[h|u|l])/gm, '<p>')
+                .replace(/(?<!>)$/gm, '</p>')
+                .replace(/<p><\/p>/g, '')
+                .replace(/<p>(<h[1-6]>)/g, '$1')
+                .replace(/(<\/h[1-6]>)<\/p>/g, '$1')
+                .replace(/<p>(<ul>)/g, '$1')
+                .replace(/(<\/ul>)<\/p>/g, '$1');
+        }
+
+        // Load markdown content
+        document.getElementById('markdown-content').innerHTML = parseMarkdown(markdownContent);
+    </script>
+</body>
+</html>
